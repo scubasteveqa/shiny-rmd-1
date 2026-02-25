@@ -1,7 +1,7 @@
 ---
-title: "Interactive R Markdown with Shiny"
+title: "Interactive R Markdown with Shiny that is pre-rendered"
 output: html_document
-runtime: shiny
+runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
