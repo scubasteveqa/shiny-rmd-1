@@ -80,6 +80,11 @@ renderPlot({
   req(input$x_var, input$y_var)
   df <- get(input$scatter_dataset)
 
+  validate(
+    need(input$x_var %in% names(df), "Updating variable selection..."),
+    need(input$y_var %in% names(df), "Updating variable selection...")
+  )
+
   p <- ggplot(df, aes(x = .data[[input$x_var]], y = .data[[input$y_var]])) +
     geom_point(color = "#FC4C02", size = 2, alpha = 0.7) +
     labs(x = input$x_var, y = input$y_var,
@@ -104,6 +109,11 @@ The table below updates automatically based on your scatter plot selections.
 renderTable({
   req(input$x_var, input$y_var)
   df <- get(input$scatter_dataset)
+
+  validate(
+    need(input$x_var %in% names(df), "Updating variable selection..."),
+    need(input$y_var %in% names(df), "Updating variable selection...")
+  )
 
   data.frame(
     Statistic = c("Min", "Median", "Mean", "Max", "SD"),
