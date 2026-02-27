@@ -22,7 +22,13 @@ selectInput("dataset", "Dataset",
 
 uiOutput("var_selector")
 
-sliderInput("bins", "Number of bins", min = 5, max = 100, value = 30)
+uiOutput("bins_ui")
+
+output$bins_ui <- renderUI({
+  req(input$variable)
+  label <- paste("Number of bins for", input$variable)
+  sliderInput("bins", label, min = 5, max = 100, value = 30)
+})
 
 output$var_selector <- renderUI({
   df <- get(input$dataset)
