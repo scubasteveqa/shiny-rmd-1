@@ -36,6 +36,13 @@ output$var_selector <- renderUI({
   selectInput("variable", "Variable", choices = num_vars)
 })
 
+tags$div(id = "hist-info", class = "test-info", textOutput("hist_info"))
+
+output$hist_info <- renderText({
+  req(input$variable)
+  paste("Dataset:", input$dataset, "| Variable:", input$variable)
+})
+
 renderPlot({
   req(input$variable)
   df <- get(input$dataset)
@@ -69,6 +76,13 @@ fluidRow(
 )
 
 checkboxInput("add_smooth", "Add trend line", value = FALSE)
+
+tags$div(id = "scatter-info", class = "test-info", textOutput("scatter_info"))
+
+output$scatter_info <- renderText({
+  req(input$x_var, input$y_var)
+  paste("Dataset:", input$scatter_dataset, "| X:", input$x_var, "| Y:", input$y_var)
+})
 
 output$x_var_ui <- renderUI({
   df <- get(input$scatter_dataset)
